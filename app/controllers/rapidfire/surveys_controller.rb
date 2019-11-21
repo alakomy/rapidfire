@@ -74,7 +74,7 @@ module Rapidfire
     private
 
     def survey_params
-      params.require(:survey).permit(:name, :introduction, :after_survey_content, :location_id, :api_id)
+      params.require(:survey).permit(:name, :introduction, :location_id, :api_id)
     end
   end
 end
