@@ -16,6 +16,7 @@ module Rapidfire
 
     def create
       @survey = Survey.new(survey_params)
+      puts "I am saving survey"
       if @survey.save
         respond_to do |format|
           format.html { redirect_to surveys_path }
