@@ -2,7 +2,7 @@ module Rapidfire
   class Survey < ActiveRecord::Base
     
     def to_param  # overridden
-      id/api_id
+      api_id
     end
     
     has_many  :attempts
