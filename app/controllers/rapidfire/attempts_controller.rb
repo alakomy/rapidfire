@@ -37,7 +37,7 @@ module Rapidfire
     private
 
     def find_survey!
-      @survey = Survey.find(params[:survey_api_id])
+      @survey = Survey.find_by_api_id(params[:survey_api_id])
     end
 
     def attempt_params
