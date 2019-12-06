@@ -55,7 +55,7 @@ module Rapidfire
     end
 
     def find_survey!
-      @survey = Survey.find(params[:survey_api_id])
+      @survey = Survey.find(params[:api_id])
     end
 
     def find_question!
