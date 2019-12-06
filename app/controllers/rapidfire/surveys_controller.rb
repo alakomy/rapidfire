@@ -31,11 +31,11 @@ module Rapidfire
     end
 
     def edit
-      @survey = Survey.find(params[:api_id])
+      @survey = Survey.find_by_api_id(params[:api_id])
     end
 
     def update
-      @survey = Survey.find(params[:api_id])
+      @survey = Survey.find_by_api_id(params[:api_id])
       if @survey.update(survey_params)
         respond_to do |format|
           format.html { redirect_to surveys_path }
@@ -50,7 +50,7 @@ module Rapidfire
     end
 
     def destroy
-      @survey = Survey.find(params[:api_id])
+      @survey = Survey.find_by_api_id(params[:api_id])
       @survey.destroy
 
       respond_to do |format|
@@ -60,7 +60,7 @@ module Rapidfire
     end
 
     def results
-      @survey = Survey.find(params[:api_id])
+      @survey = Survey.find_by_api_id(params[:api_id])
       @survey_results =
         SurveyResults.new(survey: @survey).extract
 
