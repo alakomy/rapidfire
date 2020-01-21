@@ -19,7 +19,7 @@ module Rapidfire
       puts "I am saving survey"
       if @survey.save
         respond_to do |format|
-          format.html { redirect_to surveys_path }
+          format.html { redirect_to questions_path }
           format.js
         end
       else
