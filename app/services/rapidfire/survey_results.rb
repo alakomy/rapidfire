@@ -10,12 +10,14 @@ module Rapidfire
     # 4. else return an array of all the answers given
     def extract
       @survey.questions.collect do |question|
+        total_count = 0
         results =
           case question
           when Rapidfire::Questions::Select, Rapidfire::Questions::Radio,
             Rapidfire::Questions::Checkbox
             answers = question.answers.map(&:answer_text).map do |text|
               text.to_s.split(Rapidfire.answers_delimiter)
+              total_count = total_count + 1
             end.flatten
 
             answers.inject(Hash.new(0)) { |total, e| total[e] += 1; total }
@@ -24,7 +26,7 @@ module Rapidfire
             question.answers.pluck(:answer_text)
           end
 
-        QuestionResult.new(question: question, results: results)
+        QuestionResult.new(question: question, results: results, total_count: total_count)
       end
     end
   end
