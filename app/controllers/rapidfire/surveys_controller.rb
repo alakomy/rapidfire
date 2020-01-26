@@ -52,6 +52,7 @@ module Rapidfire
     def destroy
       @survey = Survey.find_by_api_id(params[:api_id])
       @survey.active = false
+      @survey.save!
       
 
       respond_to do |format|
