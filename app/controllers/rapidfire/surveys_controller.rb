@@ -51,7 +51,8 @@ module Rapidfire
 
     def destroy
       @survey = Survey.find_by_api_id(params[:api_id])
-      @survey.destroy
+      @survey.active = false
+      
 
       respond_to do |format|
         format.html { redirect_to surveys_path }
