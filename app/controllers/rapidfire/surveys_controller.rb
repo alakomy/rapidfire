@@ -3,11 +3,28 @@ module Rapidfire
     before_action :authenticate_administrator!, except: :index
 
     def index
-      @surveys = if defined?(Kaminari)
-        Survey.page(params[:page])
+
+      if user_has_super_admin_role? || user_has_admin_role?
+        surveys = Survey.all
+
+      elsif user_has_relations_mgr_role?
+        surveys = Survey.includes(:location).where(locations: { participating: true })
+
+      elsif user_has_location_mgr_role?
+        surveys = Survey.where(location_id: current_user.locations.pluck(:id) )
+
       else
-        Survey.all
+        surveys = Survey.none
       end
+
+      @surveys = surveys.order('rapidfire_surveys.id desc')
+
+
+      # @surveys = if defined?(Kaminari)
+      #   Survey.page(params[:page])
+      # else
+      #   @surveys
+      # end
     end
 
     def new
