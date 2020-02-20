@@ -8,7 +8,8 @@ module Rapidfire
         surveys = Survey.all
 
       elsif user_has_relations_mgr_role?
-        surveys = Survey.includes(:location).where(locations: { participating: true })
+        surveys = Survey.joins('LEFT JOIN "locations" ON "locations"."id" = "rapidfire_surveys"."location_id"')
+                        .where(locations: { participating: true })
 
       elsif user_has_location_mgr_role?
         surveys = Survey.where(location_id: current_user.locations.pluck(:id) )
