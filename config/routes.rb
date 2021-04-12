@@ -3,13 +3,12 @@ Rapidfire::Engine.routes.draw do
     get 'results', on: :member
 
     resources :questions
-    resources :attempts  
-    
-    
-    
+    resources :attempts
+
   end
-  
- 
+
 
   root :to => "surveys#index"
+
+
 end
